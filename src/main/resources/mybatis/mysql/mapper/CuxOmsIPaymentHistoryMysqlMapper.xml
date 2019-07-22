@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sync.mysql.model.mapper.CuxOmsIPaymentHistoryMysqlMapper">
+	<resultMap id="BaseResultMap"
+		type="com.sync.mysql.model.CuxOmsIPaymentHistoryMysql">
+		<id column="id" property="id" jdbcType="DECIMAL" />
+		<result column="third_pay_code" property="thirdPayCode"
+			jdbcType="VARCHAR" />
+		<result column="account_id" property="accountId" jdbcType="VARCHAR" />
+		<result column="history_number" property="historyNumber"
+			jdbcType="VARCHAR" />
+		<result column="item_type" property="itemType" jdbcType="VARCHAR" />
+		<result column="in_amount" property="inAmount" jdbcType="DECIMAL" />
+		<result column="out_amount" property="outAmount" jdbcType="DECIMAL" />
+		<result column="balance_amount" property="balanceAmount"
+			jdbcType="DECIMAL" />
+		<result column="rec_match_id" property="recMatchId" jdbcType="VARCHAR" />
+		<result column="rec_date" property="recDate" jdbcType="TIMESTAMP" />
+		<result column="currency_code" property="currencyCode"
+			jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="opt_user_id" property="optUserId" jdbcType="VARCHAR" />
+		<result column="source_code" property="sourceCode" jdbcType="VARCHAR" />
+		<result column="source_id" property="sourceId" jdbcType="DECIMAL" />
+		<result column="source_reference" property="sourceReference"
+			jdbcType="VARCHAR" />
+		<result column="process_group_id" property="processGroupId"
+			jdbcType="DECIMAL" />
+		<result column="process_status" property="processStatus"
+			jdbcType="VARCHAR" />
+		<result column="process_date" property="processDate" jdbcType="TIMESTAMP" />
+		<result column="process_message" property="processMessage"
+			jdbcType="VARCHAR" />
+		<result column="row_version_number" property="rowVersionNumber"
+			jdbcType="DECIMAL" />
+		<result column="creation_date" property="creationDate"
+			jdbcType="TIMESTAMP" />
+		<result column="created_by" property="createdBy" jdbcType="DECIMAL" />
+		<result column="last_updated_by" property="lastUpdatedBy"
+			jdbcType="DECIMAL" />
+		<result column="last_update_date" property="lastUpdateDate"
+			jdbcType="TIMESTAMP" />
+		<result column="last_update_login" property="lastUpdateLogin"
+			jdbcType="DECIMAL" />
+		<result column="program_application_id" property="programApplicationId"
+			jdbcType="DECIMAL" />
+		<result column="program_id" property="programId" jdbcType="DECIMAL" />
+		<result column="program_update_date" property="programUpdateDate"
+			jdbcType="TIMESTAMP" />
+		<result column="request_id" property="requestId" jdbcType="DECIMAL" />
+		<result column="attribute_category" property="attributeCategory"
+			jdbcType="VARCHAR" />
+		<result column="attribute1" property="attribute1" jdbcType="VARCHAR" />
+		<result column="attribute2" property="attribute2" jdbcType="VARCHAR" />
+		<result column="attribute3" property="attribute3" jdbcType="VARCHAR" />
+		<result column="attribute4" property="attribute4" jdbcType="VARCHAR" />
+		<result column="attribute5" property="attribute5" jdbcType="VARCHAR" />
+		<result column="attribute6" property="attribute6" jdbcType="VARCHAR" />
+		<result column="attribute7" property="attribute7" jdbcType="VARCHAR" />
+		<result column="attribute8" property="attribute8" jdbcType="VARCHAR" />
+		<result column="attribute9" property="attribute9" jdbcType="VARCHAR" />
+		<result column="attribute10" property="attribute10" jdbcType="VARCHAR" />
+		<result column="attribute11" property="attribute11" jdbcType="VARCHAR" />
+		<result column="attribute12" property="attribute12" jdbcType="VARCHAR" />
+		<result column="attribute13" property="attribute13" jdbcType="VARCHAR" />
+		<result column="attribute14" property="attribute14" jdbcType="VARCHAR" />
+		<result column="attribute15" property="attribute15" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, third_pay_code, account_id, history_number, item_type,
+		in_amount,
+		out_amount,
+		balance_amount, rec_match_id, rec_date,
+		currency_code, remark, opt_user_id,
+		source_code,
+		source_id,
+		source_reference, process_group_id, process_status, process_date,
+		process_message,
+		row_version_number, creation_date, created_by,
+		last_updated_by, last_update_date,
+		last_update_login,
+		program_application_id, program_id,
+		program_update_date, request_id,
+		attribute_category, attribute1, attribute2, attribute3, attribute4,
+		attribute5,
+		attribute6,
+		attribute7, attribute8, attribute9, attribute10,
+		attribute11, attribute12,
+		attribute13,
+		attribute14, attribute15
+	</sql>
+	<select id="selectOmsPayhistoryByParms" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from cux_oms_i_payment_history
+		where PROCESS_STATUS =
+		#{status,jdbcType=VARCHAR} limit #{limitCount,jdbcType=DECIMAL}
+	</select>
+	<update id="batchUpdate" parameterType="java.util.List">
+		update cux_oms_i_payment_history
+		<set>
+			process_status ='COMPLETE'
+		</set>
+		<where>
+			process_status = 'PENDING'
+			and source_id IN
+			<foreach collection="list" item="item" index="index" open="("
+				close=")" separator=",">
+				${item.sourceId}
+			</foreach>
+		</where>
+	</update>
+</mapper>

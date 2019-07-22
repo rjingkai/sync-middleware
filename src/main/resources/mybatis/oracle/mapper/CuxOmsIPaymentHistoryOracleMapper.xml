@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="com.sync.oraclel.model.mapper.CuxOmsIPaymentHistoryOracleMapper">
+	<resultMap id="BaseResultMap"
+		type="com.sync.oraclel.model.CuxOmsIPaymentHistoryOracle">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="THIRD_PAY_CODE" property="thirdPayCode"
+			jdbcType="VARCHAR" />
+		<result column="ACCOUNT_ID" property="accountId" jdbcType="VARCHAR" />
+		<result column="HISTORY_NUMBER" property="historyNumber"
+			jdbcType="VARCHAR" />
+		<result column="ITEM_TYPE" property="itemType" jdbcType="VARCHAR" />
+		<result column="IN_AMOUNT" property="inAmount" jdbcType="DECIMAL" />
+		<result column="OUT_AMOUNT" property="outAmount" jdbcType="DECIMAL" />
+		<result column="BALANCE_AMOUNT" property="balanceAmount"
+			jdbcType="DECIMAL" />
+		<result column="REC_MATCH_ID" property="recMatchId" jdbcType="VARCHAR" />
+		<result column="REC_DATE" property="recDate" jdbcType="DATE" />
+		<result column="CURRENCY_CODE" property="currencyCode"
+			jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="OPT_USER_ID" property="optUserId" jdbcType="VARCHAR" />
+		<result column="SOURCE_CODE" property="sourceCode" jdbcType="VARCHAR" />
+		<result column="SOURCE_ID" property="sourceId" jdbcType="DECIMAL" />
+		<result column="SOURCE_REFERENCE" property="sourceReference"
+			jdbcType="VARCHAR" />
+		<result column="PROCESS_GROUP_ID" property="processGroupId"
+			jdbcType="DECIMAL" />
+		<result column="PROCESS_STATUS" property="processStatus"
+			jdbcType="VARCHAR" />
+		<result column="PROCESS_DATE" property="processDate" jdbcType="DATE" />
+		<result column="PROCESS_MESSAGE" property="processMessage"
+			jdbcType="VARCHAR" />
+		<result column="ROW_VERSION_NUMBER" property="rowVersionNumber"
+			jdbcType="DECIMAL" />
+		<result column="CREATION_DATE" property="creationDate"
+			jdbcType="DATE" />
+		<result column="CREATED_BY" property="createdBy" jdbcType="DECIMAL" />
+		<result column="LAST_UPDATED_BY" property="lastUpdatedBy"
+			jdbcType="DECIMAL" />
+		<result column="LAST_UPDATE_DATE" property="lastUpdateDate"
+			jdbcType="DATE" />
+		<result column="LAST_UPDATE_LOGIN" property="lastUpdateLogin"
+			jdbcType="DECIMAL" />
+		<result column="PROGRAM_APPLICATION_ID" property="programApplicationId"
+			jdbcType="DECIMAL" />
+		<result column="PROGRAM_ID" property="programId" jdbcType="DECIMAL" />
+		<result column="PROGRAM_UPDATE_DATE" property="programUpdateDate"
+			jdbcType="DATE" />
+		<result column="REQUEST_ID" property="requestId" jdbcType="DECIMAL" />
+		<result column="ATTRIBUTE_CATEGORY" property="attributeCategory"
+			jdbcType="VARCHAR" />
+		<result column="ATTRIBUTE1" property="attribute1" jdbcType="VARCHAR" />
+		<result column="ATTRIBUTE2" property="attribute2" jdbcType="VARCHAR" />
+		<result column="ATTRIBUTE3" property="attribute3" jdbcType="VARCHAR" />
+		<result column="ATTRIBUTE4" property="attribute4" jdbcType="VARCHAR" />
+		<result column="ATTRIBUTE5" property="attribute5" jdbcType="VARCHAR" />
+		<result column="ATTRIBUTE6" property="attribute6" jdbcType="VARCHAR" />
+		<result column="ATTRIBUTE7" property="attribute7" jdbcType="VARCHAR" />
+		<result column="ATTRIBUTE8" property="attribute8" jdbcType="VARCHAR" />
+		<result column="ATTRIBUTE9" property="attribute9" jdbcType="VARCHAR" />
+		<result column="ATTRIBUTE10" property="attribute10" jdbcType="VARCHAR" />
+		<result column="ATTRIBUTE11" property="attribute11" jdbcType="VARCHAR" />
+		<result column="ATTRIBUTE12" property="attribute12" jdbcType="VARCHAR" />
+		<result column="ATTRIBUTE13" property="attribute13" jdbcType="VARCHAR" />
+		<result column="ATTRIBUTE14" property="attribute14" jdbcType="VARCHAR" />
+		<result column="ATTRIBUTE15" property="attribute15" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, THIRD_PAY_CODE, ACCOUNT_ID, HISTORY_NUMBER, ITEM_TYPE,
+		IN_AMOUNT,
+		OUT_AMOUNT,
+		BALANCE_AMOUNT, REC_MATCH_ID, REC_DATE,
+		CURRENCY_CODE, REMARK, OPT_USER_ID,
+		SOURCE_CODE,
+		SOURCE_ID,
+		SOURCE_REFERENCE, PROCESS_GROUP_ID, PROCESS_STATUS, PROCESS_DATE,
+		PROCESS_MESSAGE,
+		ROW_VERSION_NUMBER, CREATION_DATE, CREATED_BY,
+		LAST_UPDATED_BY, LAST_UPDATE_DATE,
+		LAST_UPDATE_LOGIN,
+		PROGRAM_APPLICATION_ID, PROGRAM_ID,
+		PROGRAM_UPDATE_DATE, REQUEST_ID,
+		ATTRIBUTE_CATEGORY, ATTRIBUTE1, ATTRIBUTE2, ATTRIBUTE3, ATTRIBUTE4,
+		ATTRIBUTE5,
+		ATTRIBUTE6,
+		ATTRIBUTE7, ATTRIBUTE8, ATTRIBUTE9, ATTRIBUTE10,
+		ATTRIBUTE11, ATTRIBUTE12,
+		ATTRIBUTE13,
+		ATTRIBUTE14, ATTRIBUTE15
+	</sql>
+	<select id="selectBySouceIds" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from CUX.CUX_OMS_I_PAYMENT_HISTORY
+		where SOURCE_code='WMS' AND
+		source_Id in ${sourceIds}
+	</select>
+	<insert id="batchInsert" parameterType="java.util.List">
+		insert into CUX.CUX_OMS_I_PAYMENT_HISTORY (ID, THIRD_PAY_CODE,
+		ACCOUNT_ID,
+		HISTORY_NUMBER, ITEM_TYPE, IN_AMOUNT,
+		OUT_AMOUNT,
+		BALANCE_AMOUNT, REC_MATCH_ID,
+		REC_DATE, CURRENCY_CODE, REMARK,
+		OPT_USER_ID, SOURCE_CODE, SOURCE_ID,
+		SOURCE_REFERENCE,
+		PROCESS_GROUP_ID, PROCESS_STATUS,
+		PROCESS_DATE, PROCESS_MESSAGE,
+		ROW_VERSION_NUMBER,
+		CREATION_DATE, CREATED_BY, LAST_UPDATED_BY,
+		LAST_UPDATE_DATE, LAST_UPDATE_LOGIN, PROGRAM_APPLICATION_ID,
+		PROGRAM_ID, PROGRAM_UPDATE_DATE, REQUEST_ID,
+		ATTRIBUTE_CATEGORY,
+		ATTRIBUTE1, ATTRIBUTE2,
+		ATTRIBUTE3, ATTRIBUTE4, ATTRIBUTE5,
+		ATTRIBUTE6,
+		ATTRIBUTE7, ATTRIBUTE8,
+		ATTRIBUTE9, ATTRIBUTE10, ATTRIBUTE11,
+		ATTRIBUTE12, ATTRIBUTE13, ATTRIBUTE14,
+		ATTRIBUTE15)
+		<foreach collection="list" item="item" index="index"
+			separator="union all">
+			(select #{item.id,jdbcType=DECIMAL},
+			#{item.thirdPayCode,jdbcType=VARCHAR},
+			#{item.accountId,jdbcType=VARCHAR},
+			#{item.historyNumber,jdbcType=VARCHAR},
+			#{item.itemType,jdbcType=VARCHAR}, #{item.inAmount,jdbcType=DECIMAL},
+			#{item.outAmount,jdbcType=DECIMAL},
+			#{item.balanceAmount,jdbcType=DECIMAL},
+			#{item.recMatchId,jdbcType=VARCHAR},
+			#{item.recDate,jdbcType=DATE},
+			#{item.currencyCode,jdbcType=VARCHAR},
+			#{item.remark,jdbcType=VARCHAR},
+			#{item.optUserId,jdbcType=VARCHAR},
+			#{item.sourceCode,jdbcType=VARCHAR},
+			#{item.sourceId,jdbcType=DECIMAL},
+			#{item.sourceReference,jdbcType=VARCHAR},
+			#{item.processGroupId,jdbcType=DECIMAL},
+			#{item.processStatus,jdbcType=VARCHAR},
+			#{item.processDate,jdbcType=TIMESTAMP},
+			#{item.processMessage,jdbcType=VARCHAR},
+			#{item.rowVersionNumber,jdbcType=DECIMAL},
+			#{item.creationDate,jdbcType=TIMESTAMP},
+			#{item.createdBy,jdbcType=DECIMAL},
+			#{item.lastUpdatedBy,jdbcType=DECIMAL},
+			#{item.lastUpdateDate,jdbcType=TIMESTAMP},
+			#{item.lastUpdateLogin,jdbcType=DECIMAL},
+			#{item.programApplicationId,jdbcType=DECIMAL},
+			#{item.programId,jdbcType=DECIMAL},
+			#{item.programUpdateDate,jdbcType=TIMESTAMP},
+			#{item.requestId,jdbcType=DECIMAL},
+			#{item.attributeCategory,jdbcType=VARCHAR},
+			#{item.attribute1,jdbcType=VARCHAR},
+			#{item.attribute2,jdbcType=VARCHAR},
+			#{item.attribute3,jdbcType=VARCHAR},
+			#{item.attribute4,jdbcType=VARCHAR},
+			#{item.attribute5,jdbcType=VARCHAR},
+			#{item.attribute6,jdbcType=VARCHAR},
+			#{item.attribute7,jdbcType=VARCHAR},
+			#{item.attribute8,jdbcType=VARCHAR},
+			#{item.attribute9,jdbcType=VARCHAR},
+			#{item.attribute10,jdbcType=VARCHAR},
+			#{item.attribute11,jdbcType=VARCHAR},
+			#{item.attribute12,jdbcType=VARCHAR},
+			#{item.attribute13,jdbcType=VARCHAR},
+			#{item.attribute14,jdbcType=VARCHAR},
+			#{item.attribute15,jdbcType=VARCHAR}
+			from dual)
+		</foreach>
+	</insert>
+</mapper>
